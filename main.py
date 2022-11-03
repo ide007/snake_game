@@ -42,7 +42,7 @@ def get_random_empty_block():
     y = random.randint(0, ROWS - 1)
     empty_block = SnakeBody(x, y)
     while empty_block in snake_blocks:
-        empty_block.x = random.randint(0, COLUMNS -1)
+        empty_block.x = random.randint(0, COLUMNS - 1)
         empty_block.y = random.randint(0, ROWS - 1)
     return empty_block
 
@@ -54,7 +54,7 @@ def draw_block(color, row, column):
                           column + 1), BLOCK_SIZE, BLOCK_SIZE])
 
 
-snake_blocks = [SnakeBody(1, 1), SnakeBody(1, 2), SnakeBody(1, 3)]
+snake_blocks = [SnakeBody(10, 8), SnakeBody(10, 9), SnakeBody(10, 9)]
 food = get_random_empty_block()
 d_row = 0
 d_col = 1
@@ -88,7 +88,6 @@ while True:
             else:
                 color = BLUE
             draw_block(color, column, row)
-
 
     pg.draw.rect(window, HEADER_COLOR, [0, 0, size[0], HEADER_MARGIN])
 
