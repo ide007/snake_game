@@ -10,6 +10,7 @@ BLUE = (204, 255, 255)
 RED = (224, 0, 0)
 HEADER_COLOR = (0, 205, 155)
 SNAKE_COLOR = (0, 102, 0)
+score = 0
 
 x, y = randrange(0, RES, SIZE), randrange(0, RES, SIZE)
 food = randrange(0, RES, SIZE), randrange(0, RES, SIZE)
@@ -22,6 +23,7 @@ fps = 5
 pg.init()
 screen = pg.display.set_mode([RES, RES])
 clock = pg.time.Clock()
+font_score = pg.font.SysFont('Arial', 26, bold=True)
 
 while True:
     screen.fill(BACKGROUND_COLOR)
@@ -31,6 +33,9 @@ while True:
     pg.display.flip()
     clock.tick(fps)
 
+    render_score = font_score.render(f'SCORE: {score}', True, pg.Color('orange'))
+    screen.blit(render_score, (5, 5))
+
     x += dx * SIZE
     y += dy * SIZE
     snake.append((x, y))
@@ -39,10 +44,11 @@ while True:
     if snake[-1] == food:
         food = randrange(0, RES, SIZE), randrange(0, RES, SIZE)
         length += 1
+        score += 1
         if length % 2 == 0:
             fps += 1
 
-    if not 0 < x < RES - SIZE or not 0 < y < RES - SIZE or len(snake) != len(set(snake)):
+    if not 0 < x < RES or not 0 < y < RES or len(snake) != len(set(snake)):
         print('You lose')
         break
 
